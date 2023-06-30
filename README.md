@@ -1,8 +1,9 @@
 # vscode-markdown-mojicolor
-EN: VScode extension to enable changing Markdown text color.
-JP: Markdownの文字色を変更可能にするVScode拡張機能
+EN:  VScode extension that allows changing Markdown text color with `%character%{color}`.
 
+JP: `%文字%{色}`でMarkdownの文字色を変更可能にするVScode拡張機能｡
 
+![](https://github.com/yusu79/vscode-markdown-mojicolor/blob/main/img/intro.png)
 
 <!-- omit in toc -->
 ## TOC
@@ -10,6 +11,7 @@ JP: Markdownの文字色を変更可能にするVScode拡張機能
 - [markdown-it-plugin in use](#markdown-it-plugin-in-use)
 
 ## Quick usage
+
 Works:
 | Input                   | Render                                                 | 
 | ----------------------- | ------------------------------------------------------ | 
