@@ -1,0 +1,2 @@
+# vscode-markdown-mojicolor
+Markdownの文字色を変更可能にするVScode拡張機能
