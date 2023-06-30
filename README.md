@@ -1,5 +1,8 @@
 # vscode-markdown-mojicolor
-VScode extension to enable changing Markdown text color.
+EN: VScode extension to enable changing Markdown text color.
+JP: Markdownの文字色を変更可能にするVScode拡張機能
+
+
 
 <!-- omit in toc -->
 ## TOC
@@ -8,16 +11,19 @@ VScode extension to enable changing Markdown text color.
 
 ## Quick usage
 Works:
-| Input               | Render                                | 
-| ------------------- | ------------------------------------- | 
-| `%Tomato%{tomato}`  | `<font color="tomato">Tomato</font>`  | 
-| `%Orange%{#ffa500}` | `<font color="#ffa500">Orange</font>` | 
+| Input                   | Render                                                 | 
+| ----------------------- | ------------------------------------------------------ | 
+| `%Tomato%{tomato}`      | `<font color="tomato">Tomato</font>`                   | 
+| `%Orange%{#ffa500}`     | `<font color="#ffa500">Orange</font>`                  | 
+| `**%Orange%{#ffa500}**` | `<strong><font color="#ffa500">Orange</font></strong>` | 
 
 Doesn't work:
-| Input                      | Render                                       | Description                  | 
-| -------------------------- | -------------------------------------------- | ---------------------------- | 
-| `%Aqua%{rgb(0,255,255)}`   | `<font color="rgb(0,255,255)">Aqua</font>`   | `<font>` does not support RGB. | 
-| `%Bisque%{hsb(33,23,100)}` | `<font color="hsb(33,23,100)">Bisque</font>` | `<font>` does not support HSB. | 
+| Input                      | Render                                       | Description                      | 
+| -------------------------- | -------------------------------------------- | -------------------------------- | 
+| `%Aqua%{rgb(0,255,255)}`   | `<font color="rgb(0,255,255)">Aqua</font>`   | `<font>` does not support RGB.   | 
+| `%Bisque%{hsb(33,23,100)}` | `<font color="hsb(33,23,100)">Bisque</font>` | `<font>` does not support HSB.   | 
+| `%**Orange**%{#ffa500}`    | `<font color="#ffa500">**Orange**</font>`    | The `**` is output as it is. | 
+
 
 
 ## markdown-it-plugin in use
