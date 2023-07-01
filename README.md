@@ -1,4 +1,5 @@
 # vscode-markdown-mojicolor
+![GitHub](https://img.shields.io/github/license/yusu79/vscode-markdown-mojicolor)
 ![Visual Studio Marketplace Version (including pre-releases)](https://img.shields.io/visual-studio-marketplace/v/yusu79.markdown-mojicolor)
 ![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/yusu79.markdown-mojicolor)
 
