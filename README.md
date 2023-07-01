@@ -1,32 +1,32 @@
 # vscode-markdown-mojicolor
-EN:  VScode extension that allows changing Markdown text color with `%character%{color}`.
+Markdownの文字色を変更可能にするVScode拡張機能です｡
 
-JP: `%文字%{色}`でMarkdownの文字色を変更可能にするVScode拡張機能｡
+以下のように､`%文字%{色}`とすると､文字が指定した色でレンダリングされます｡
 
-![](https://github.com/yusu79/vscode-markdown-mojicolor/blob/main/images/intro.png)
+![](./images/intro.png)
 
 <!-- omit in toc -->
-## TOC
-- [Quick usage](#quick-usage)
-- [markdown-it-plugin in use](#markdown-it-plugin-in-use)
+## 目次
+- [使い方](#使い方)
+- [使用しているmarkdown-itプラグイン](#使用しているmarkdown-itプラグイン)
 
-## Quick usage
+## 使い方
 
 Works:
-| Input                   | Render                                                 | 
-| ----------------------- | ------------------------------------------------------ | 
-| `%Tomato%{tomato}`      | `<font color="tomato">Tomato</font>`                   | 
-| `%Orange%{#ffa500}`     | `<font color="#ffa500">Orange</font>`                  | 
-| `**%Orange%{#ffa500}**` | `<strong><font color="#ffa500">Orange</font></strong>` | 
+| 入力                    | レンダリング                                           | 説明                                                     | 
+| ----------------------- | ------------------------------------------------------ | -------------------------------------------------------- | 
+| `%トマト%{tomato}`      | `<font color="tomato">トマト</font>`                   | 色を直接指定できます｡                                   | 
+| `%オレンジ%{#ffa500}`     | `<font color="#ffa500">オレンジ</font>`                  | 16進数でも色を指定できます｡                             | 
+| `**%オレンジ%{#ffa500}**` | `<strong><font color="#ffa500">オレンジ</font></strong>` | 太字にしたいなら､`**%文字%{色}**`のようにしてください｡ | 
 
 Doesn't work:
-| Input                      | Render                                       | Description                      | 
+| 入力                      | レンダリング                                       | 説明                      | 
 | -------------------------- | -------------------------------------------- | -------------------------------- | 
-| `%Aqua%{rgb(0,255,255)}`   | `<font color="rgb(0,255,255)">Aqua</font>`   | `<font>` does not support RGB.   | 
-| `%Bisque%{hsb(33,23,100)}` | `<font color="hsb(33,23,100)">Bisque</font>` | `<font>` does not support HSB.   | 
-| `%**Orange**%{#ffa500}`    | `<font color="#ffa500">**Orange**</font>`    | The `**` is output as it is. | 
+| `%アクア%{rgb(0,255,255)}`   | `<font color="rgb(0,255,255)">アクア</font>`   | `<font>` はRGBをサポートしていません｡   | 
+| `%ビスク%{hsb(33,23,100)}` | `<font color="hsb(33,23,100)">ビスク</font>` | `<font>` はHSBをサポートしていません｡   | 
+| `%**オレンジ**%{#ffa500}`    | `<font color="#ffa500">**オレンジ**</font>`    | `%**文字**%{色}`のようにすると､太字にならず､そのまま記号として表示されます｡ | 
 
 
 
-## markdown-it-plugin in use
+## 使用しているmarkdown-itプラグイン
 - [yusu79/markdown-it-mojicolor](https://l.pg1x.com/sggo)

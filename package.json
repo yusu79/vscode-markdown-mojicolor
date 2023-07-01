@@ -1,8 +1,8 @@
 {
   "name": "markdown-mojicolor",
   "displayName": "Markdown MojiColor",
-  "description": "VScode extension to enable changing Markdown text color",
-  "version": "1.0.1",
+  "description": "Markdownの文字色を変更可能にするVScode拡張機能です｡",
+  "version": "1.0.5",
   "publisher": "yusu79",
   "author": {
     "name": "yusu79",
@@ -13,7 +13,7 @@
     "type": "git",
     "url": "https://github.com/yusu79/vscode-markdown-mojicolor"
   },
-  "icon": "icons/mojicolor.png",
+  "icon": "icons/icon.png",
   "private": true,
   "keywords": [
     "markdown",
