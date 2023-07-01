@@ -1,4 +1,9 @@
 # vscode-markdown-mojicolor
+![Visual Studio Marketplace Version (including pre-releases)](https://img.shields.io/visual-studio-marketplace/v/yusu79.markdown-mojicolor)
+![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/yusu79.markdown-mojicolor)
+
+
+
 Markdownの文字色を変更可能にするVScode拡張機能です｡
 
 以下のように､`%文字%{色}`とすると､文字が指定した色でレンダリングされます｡
