@@ -59,7 +59,7 @@ VScodeのマーケットプレイスで「Markdown MojiColor」と入力して�
 
 
 
-サイト元の原色大辞典（https://www.colordic.org/）さんには、OSSでの公開と使用の許可を頂いております。
+サイト元の原色大辞典（ https://www.colordic.org/ )さんには、OSSでの公開と使用の許可を頂いております。
 
 
 ## 使用しているmarkdown-itプラグイン
