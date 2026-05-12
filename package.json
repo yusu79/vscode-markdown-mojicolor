@@ -3,6 +3,12 @@
   "displayName": "Markdown MojiColor",
   "description": "Markdownの文字色を変更可能にするVScode拡張機能です｡",
   "version": "1.1.1",
+  "engines": {
+    "vscode": "^1.79.0"
+  },
+  "categories": [
+    "Other"
+  ],
   "publisher": "yusu79",
   "author": {
     "name": "yusu79",
@@ -25,14 +31,8 @@
     "color",
     "text"
   ],
-  "engines": {
-    "vscode": "^1.79.0"
-  },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [],
   "main": "./extension.js",
+  "activationEvents": [],
   "contributes": {
     "markdown.markdownItPlugins": true
   },
@@ -42,17 +42,22 @@
     "test": "node ./test/runTest.js"
   },
   "devDependencies": {
-    "@types/glob": "^8.1.0",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "20.2.5",
-    "@types/vscode": "^1.79.0",
-    "@vscode/test-electron": "^2.3.2",
-    "eslint": "^8.41.0",
-    "glob": "^8.1.0",
-    "mocha": "^10.2.0",
-    "typescript": "^5.1.3"
+    "@types/glob": "^9.0.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "25.7.0",
+    "@types/vscode": "^1.118.0",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^10.3.0",
+    "glob": "^13.0.6",
+    "mocha": "^11.3.0",
+    "typescript": "^6.0.3"
   },
   "dependencies": {
-    "markdown-it-mojicolor": "^1.2.1"
+    "markdown-it-mojicolor": "^1.2.2"
+  },
+  "overrides": {
+    "mocha": {
+      "serialize-javascript": "^7.0.5"
+    }
   }
 }

@@ -2,6 +2,7 @@
 ![GitHub](https://img.shields.io/github/license/yusu79/vscode-markdown-mojicolor)
 ![Visual Studio Marketplace Version (including pre-releases)](https://img.shields.io/visual-studio-marketplace/v/yusu79.markdown-mojicolor)
 ![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/yusu79.markdown-mojicolor)
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/yusu79.markdown-mojicolor)
 
 
 
@@ -17,13 +18,15 @@ Markdownの文字色を変更可能にするVScode拡張機能です｡
 - [使い方（Quick usage）](#使い方quick-usage)
 - [解説（Usage）](#解説usage)
 - [参照サイト（Reference Website）](#参照サイトreference-website)
-- [使用しているmarkdown-itプラグイン（Plugins）](#使用しているmarkdown-itプラグインplugins)
+- [使用しているプラグイン（Plugins）](#使用しているプラグインplugins)
 
 
 ## インストール（Setup）
 VScodeのマーケットプレイスで「Markdown MojiColor」と入力してください｡
 
-![](./images/markdown-mojicolor.png)
+<p align="center">
+<img src="images/setup.png" width="80%"/>
+</p>
 
 
 ## 使い方（Quick usage）
@@ -62,5 +65,5 @@ VScodeのマーケットプレイスで「Markdown MojiColor」と入力して�
 サイト元の原色大辞典（ https://www.colordic.org/ )さんには、OSSでの公開と使用の許可を頂いております。
 
 
-## 使用しているmarkdown-itプラグイン（Plugins）
+## 使用しているプラグイン（Plugins）
 - [yusu79/markdown-it-mojicolor](https://l.pg1x.com/sggo)
