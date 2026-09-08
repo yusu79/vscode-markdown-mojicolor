@@ -1,8 +1,5 @@
 # vscode-markdown-mojicolor
 ![GitHub](https://img.shields.io/github/license/yusu79/vscode-markdown-mojicolor)
-![Visual Studio Marketplace Version (including pre-releases)](https://img.shields.io/visual-studio-marketplace/v/yusu79.markdown-mojicolor)
-![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/yusu79.markdown-mojicolor)
-![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/yusu79.markdown-mojicolor)
 
 
 
@@ -10,13 +7,16 @@ Markdownの文字色を変更可能にするVScode拡張機能です｡
 
 以下のように､`%文字%{色}`とすると､文字が指定した色でレンダリングされます｡
 
-![](./images/intro.png)
+![](./images/intro-jp.png)
 
 <!-- omit in toc -->
-## 目次（TOC）
+## 目次
 - [インストール（Setup）](#インストールsetup)
 - [使い方（Quick usage）](#使い方quick-usage)
 - [解説（Usage）](#解説usage)
+- [太字と斜体の自動着色](#太字と斜体の自動着色)
+- [色付き文字内のMarkdown](#色付き文字内のmarkdown)
+- [色辞書の追加](#色辞書の追加)
 - [参照サイト（Reference Website）](#参照サイトreference-website)
 - [使用しているプラグイン（Plugins）](#使用しているプラグインplugins)
 
@@ -30,16 +30,16 @@ VScodeのマーケットプレイスで「Markdown MojiColor」と入力して�
 
 
 ## 使い方（Quick usage）
-| 入力（Input）                    | レンダリング（Rendering）                                               | 説明（Description）                                      | Description                                                                                    | 
-| -------------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | 
-| `%トマト%{tomato}`               | `<span style="color: tomato;">トマト</span>`                            | 色を直接指定できます｡                                   | Specified by color.                                                                            | 
-| `%イエロー%{#ffdc00}`            | `<span style="color: #ffdc00;">イエロー</span>`                         | 16進数で色を指定できます｡                               | Specified in hexadecimal.                                                                      | 
-| `%イエロー%{イエロー}`           | `<span style="color: #ffdc00;">イエロー</span>`                         | 日本語で指定すると､対応した16進数に変換します｡         | Specified in Japanese, converted to hexadecimal.                                               | 
-| `%桃%{桃色}`                     | `<span style="color: #f09199;">桃</span>`                               | [和色](https://l.pg1x.com/X3e4)も指定できます｡          | Specified in [Japanese traditional colors](https://l.pg1x.com/X3e4), converted to hexadecimal. | 
-| `%桃%{ももいろ}`                 | `<span style="color: #f09199;">桃</span>`                               | 読み仮名でも指定できます｡                               | Specified in kana, converted to hexadecimal.                                                   | 
-| `%アクア%{rgb(0,255,255)}`       | `<span style="color: rgb(0,255,255);">アクア</span>`                    | RGB表記で色を指定できます｡                              | Specified in RGB.                                                                              | 
-| `%ビスク%{hsl(33,100%,88%)}`     | `<span style="color: hsl(33,100%,88%);">ビスク</span>`                  | HSL表記で色を指定できます｡                              | Specified in HSL.                                                                              | 
-| `**%ビスク%{hsl(33,100%,88%)}**` | `<strong><span style="color: hsl(33,100%,88%);">ビスク</span></strong>` | 太字にしたいなら､`**%文字%{色}**`のようにしてください｡ | If you want to make it bold, please use `**%text%{color}**` like this.<br>                     | 
+| 入力（Input）                    | レンダリング（Rendering）                                               | 説明（Description）                                      | Description                                                                                    |
+| -------------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `%トマト%{tomato}`               | `<span style="color: tomato;">トマト</span>`                            | 色を直接指定できます｡                                   | Specified by color.                                                                            |
+| `%イエロー%{#ffdc00}`            | `<span style="color: #ffdc00;">イエロー</span>`                         | 16進数で色を指定できます｡                               | Specified in hexadecimal.                                                                      |
+| `%イエロー%{イエロー}`           | `<span style="color: #ffdc00;">イエロー</span>`                         | 日本語で指定すると､対応した16進数に変換します｡         | Specified in Japanese, converted to hexadecimal.                                               |
+| `%桃%{桃色}`                     | `<span style="color: #f09199;">桃</span>`                               | [和色](https://l.pg1x.com/X3e4)も指定できます｡          | Specified in [Japanese traditional colors](https://l.pg1x.com/X3e4), converted to hexadecimal. |
+| `%桃%{ももいろ}`                 | `<span style="color: #f09199;">桃</span>`                               | 読み仮名でも指定できます｡                               | Specified in kana, converted to hexadecimal.                                                   |
+| `%アクア%{rgb(0,255,255)}`       | `<span style="color: rgb(0,255,255);">アクア</span>`                    | RGB表記で色を指定できます｡                              | Specified in RGB.                                                                              |
+| `%ビスク%{hsl(33,100%,88%)}`     | `<span style="color: hsl(33,100%,88%);">ビスク</span>`                  | HSL表記で色を指定できます｡                              | Specified in HSL.                                                                              |
+| `**%ビスク%{hsl(33,100%,88%)}**` | `<strong><span style="color: hsl(33,100%,88%);">ビスク</span></strong>` | 太字にしたいなら､`**%文字%{色}**`のようにしてください｡ | If you want to make it bold, please use `**%text%{color}**` like this.<br>                     |
 
 
 ## 解説（Usage）
@@ -53,6 +53,59 @@ VScodeのマーケットプレイスで「Markdown MojiColor」と入力して�
 どの色に対応しているかは、[日本の伝統色 和色大辞典 - Traditional Colors of Japan](https://l.pg1x.com/X3e4)を参照してください。
 
 
+## 太字と斜体の自動着色
+VS Code設定で太字と斜体の既定色を指定できます。
+
+```json
+{
+  "markdownMojicolor.styles.bold": "blue",
+  "markdownMojicolor.styles.italic": "桜色"
+}
+```
+
+値を`null`にすると、その要素を自動着色しません。`%...%{色}`による明示的な指定は自動着色より優先されます。
+
+文書ごとに変更する場合は、Markdownファイル先頭のYAML Front Matterで指定します。指定した項目だけがVS Code設定を上書きします。
+
+```yaml
+---
+markdown:
+  mojicolor:
+    bold: yellow
+    italic: null
+---
+```
+
+この例では太字を黄色にし、斜体の自動着色を無効にします。Front Matterの設定はほかの文書へ引き継がれません。
+
+入力途中の空の`mojicolor:`や`mojicolor: null`は設定なしとして扱い、VS Code設定を継承します。個別の`bold: null`・`italic: null`（値を省略した空キーを含む）は、その項目の自動着色を解除します。
+
+
+## 色付き文字内のMarkdown
+色を付ける範囲内でも、太字、斜体、リンク、インラインコードなどのMarkdown記法を使用できます。
+
+```md
+%**太字**と*斜体*%{blue}
+%[リンク](https://example.com)%{blue}
+%`インラインコード`%{blue}
+```
+
+
+## 色辞書の追加
+`markdownMojicolor.colorFiles`に色辞書JSONの絶対パスを指定できます。
+
+```json
+{
+  "markdownMojicolor.colorFiles": [
+    "C:\\path\\to\\common-colors.json",
+    "C:\\path\\to\\project-colors.json"
+  ]
+}
+```
+
+辞書は`{ "空色": "#00a6da" }`の形式で記述します。後に指定したファイルほど優先され、組み込み色も上書きできます。設定や辞書ファイルを変更した場合は、Markdownプレビューを開き直してください。反映されない場合はVS Codeウィンドウを再読み込みしてください。
+
+
 ## 参照サイト（Reference Website）
 - [日本の伝統色 和色大辞典 - Traditional Colors of Japan](https://l.pg1x.com/X3e4)
 - [世界の伝統色 洋色大辞典 - Traditional Colors of World](https://l.pg1x.com/eT5p)
@@ -62,8 +115,8 @@ VScodeのマーケットプレイスで「Markdown MojiColor」と入力して�
 
 
 
-サイト元の原色大辞典（ https://www.colordic.org/ )さんには、OSSでの公開と使用の許可を頂いております。
+サイト元の「[原色大辞典](https://www.colordic.org/)」さんには、OSSでの公開と使用の許可を頂いております。
 
 
 ## 使用しているプラグイン（Plugins）
-- [yusu79/markdown-it-mojicolor](https://l.pg1x.com/sggo)
+- [yusu79/markdown-it-mojicolor](https://github.com/yusu79/markdown-it-mojicolor)
