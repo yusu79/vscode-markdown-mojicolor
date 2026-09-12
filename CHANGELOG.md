@@ -22,6 +22,12 @@
 
 ---
 
+### [1.2.1] - 2026-09-12
+
+#### 修正
+
+- READMEに記載した和色一覧へのリンク切れを修正
+
 ### [1.2.0] - 2026-09-12
 
 #### 追加
@@ -72,6 +78,12 @@ Version X.Y.Z:
 - Z, patch version: backward-compatible bug fixes
 
 ---
+
+### [1.2.1] - 2026-09-12
+
+#### Fixed
+
+- Fixed the broken link to the Japanese traditional color list in the README.
 
 ### [1.2.0] - 2026-09-12
 
