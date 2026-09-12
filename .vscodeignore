@@ -1,6 +1,12 @@
+.github/**
 .vscode/**
 .vscode-test/**
+.out-of-code-insights/**
+docs/**
 test/**
+test-RunExtension/**
+テスト/**
+.gitmessage
 .gitignore
 .yarnrc
 vsc-extension-quickstart.md
@@ -8,3 +14,6 @@ vsc-extension-quickstart.md
 **/*.map
 **/.eslintrc.json
 worktable/
+AGENTS.md
+CONTRIBUTING.md
+eslint.config.cjs

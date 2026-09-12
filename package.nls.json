@@ -1,0 +1,6 @@
+{
+  "extension.description": "A VS Code extension that lets you change text colors in Markdown previews.",
+  "markdownMojicolor.styles.bold.markdownDescription": "Color used to automatically color bold text in the Markdown preview. Leave blank to disable automatic coloring.",
+  "markdownMojicolor.styles.italic.markdownDescription": "Color used to automatically color italic text in the Markdown preview. Leave blank to disable automatic coloring.",
+  "markdownMojicolor.colorFiles.markdownDescription": "Absolute paths to JSON files loaded in order as additional color dictionaries. Later files override earlier definitions and built-in colors."
+}

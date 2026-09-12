@@ -1,6 +1,8 @@
 # テスト
 テスト/
 .vscode-test/
+test-RunExtension/*
+!/test-RunExtension/.gitkeep
 
 # OS
 .DS_Store

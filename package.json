@@ -2,8 +2,8 @@
   "private": true,
   "name": "markdown-mojicolor",
   "displayName": "Markdown MojiColor",
-  "description": "Markdownの文字色を変更可能にするVScode拡張機能です｡",
-  "version": "1.1.1",
+  "description": "%extension.description%",
+  "version": "1.2.0",
   "engines": {
     "vscode": "^1.79.0"
   },
@@ -43,13 +43,13 @@
           "type": "string",
           "default": "",
           "scope": "window",
-          "markdownDescription": "Markdownプレビューの太字を自動着色する色です。空欄の場合は自動着色しません。"
+          "markdownDescription": "%markdownMojicolor.styles.bold.markdownDescription%"
         },
         "markdownMojicolor.styles.italic": {
           "type": "string",
           "default": "",
           "scope": "window",
-          "markdownDescription": "Markdownプレビューの斜体を自動着色する色です。空欄の場合は自動着色しません。"
+          "markdownDescription": "%markdownMojicolor.styles.italic.markdownDescription%"
         },
         "markdownMojicolor.colorFiles": {
           "type": "array",
@@ -58,7 +58,7 @@
           },
           "default": [],
           "scope": "window",
-          "markdownDescription": "追加の色辞書として順番に読み込むJSONファイルの絶対パスです。後のファイルが先の定義と組み込み色を上書きします。"
+          "markdownDescription": "%markdownMojicolor.colorFiles.markdownDescription%"
         }
       }
     }
@@ -72,12 +72,14 @@
     "@types/glob": "^9.0.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "25.7.0",
-    "@types/vscode": "^1.118.0",
+    "@types/vscode": "1.79.0",
     "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.9.2",
     "eslint": "^10.3.0",
     "glob": "^13.0.6",
     "markdown-it": "^14.3.1",
     "mocha": "^12.0.0",
+    "ovsx": "^1.2.0",
     "typescript": "^6.0.3"
   },
   "dependencies": {

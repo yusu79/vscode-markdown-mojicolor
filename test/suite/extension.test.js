@@ -5,9 +5,33 @@ const assert = require('assert');
 const vscode = require('vscode');
 const myExtension = require('../../extension');
 const { applyFrontMatter, getMarkdownMojicolor } = require('../../frontmatter');
+const packageManifest = require('../../package.json');
+const packageNls = require('../../package.nls.json');
+const packageNlsJa = require('../../package.nls.ja.json');
 
 suite('Extension Test Suite', () => {
 	vscode.window.showInformationMessage('Start all tests.');
+
+	test('拡張機能と設定の説明文を日本語と英語でローカライズする', () => {
+		const properties = packageManifest.contributes.configuration.properties;
+		const expectedJapanese = {
+			'markdownMojicolor.styles.bold': 'Markdownプレビューの太字を自動着色する色です。空欄の場合は自動着色しません。',
+			'markdownMojicolor.styles.italic': 'Markdownプレビューの斜体を自動着色する色です。空欄の場合は自動着色しません。',
+			'markdownMojicolor.colorFiles': '追加の色辞書として順番に読み込むJSONファイルの絶対パスです。後のファイルが先の定義と組み込み色を上書きします。'
+		};
+		assert.strictEqual(packageManifest.description, '%extension.description%');
+		assert.strictEqual(packageNls['extension.description'], 'A VS Code extension that lets you change text colors in Markdown previews.');
+		assert.strictEqual(packageNlsJa['extension.description'], 'Markdownの文字色を変更可能にするVS Code拡張機能です｡');
+
+		for (const [setting, japanese] of Object.entries(expectedJapanese)) {
+			const key = `${setting}.markdownDescription`;
+			assert.strictEqual(properties[setting].markdownDescription, `%${key}%`);
+			assert.strictEqual(typeof packageNls[key], 'string');
+			assert.notStrictEqual(packageNls[key], '');
+			assert.strictEqual(packageNlsJa[key], japanese);
+		}
+		assert.deepStrictEqual(Object.keys(packageNls).sort(), Object.keys(packageNlsJa).sort());
+	});
 
 	test('設定をmarkdown-it-mojicolorのオプションへ変換する', () => {
 		const values = new Map([
