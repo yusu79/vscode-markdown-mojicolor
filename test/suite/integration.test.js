@@ -50,6 +50,26 @@ function parser(values) {
 }
 
 suite('Feature color customization integration', () => {
+	test('Markdown Clipが渡すFront Matterから文書単位の色を適用する', () => {
+		const md = parser({ 'styles.bold': 'red', 'styles.italic': 'green' });
+		const env = {
+			frontmatter: {
+				markdown: {
+					mojicolor: { bold: 'yellow', italic: null }
+				}
+			},
+			markdownClip: {
+				removeHeadingId: true,
+				removeVSCodeAttributes: true
+			}
+		};
+
+		assert.strictEqual(
+			md.render('**太字** *斜体* %**青**%{blue}', env),
+			'<p><strong style="color: yellow;">太字</strong> <em>斜体</em> <span style="color: blue;"><strong>青</strong></span></p>\n'
+		);
+	});
+
 	test('HTML出力元のenv設定を保持し、VS Code設定と明示色の優先順位を維持する', () => {
 		const md = parser({ 'styles.bold': 'red', 'styles.italic': 'green' });
 		const env = Object.freeze({ markdownMojicolor: Object.freeze({ bold: 'yellow', italic: null }) });
@@ -66,6 +86,9 @@ suite('Feature color customization integration', () => {
 			['markdown:\n  mojicolor:', 'red'],
 			['markdown:\n  mojicolor: null', 'red'],
 			['markdown:\n  mojicolor: {}', 'red'],
+			['markdown:\n  mojicolor:\n    b:', 'red'],
+			['markdown:\n  mojicolor:\n    bo:', 'red'],
+			['markdown:\n  mojicolor:\n    bol:', 'red'],
 			['markdown:\n  mojicolor:\n    bold:', null],
 			['markdown:\n  mojicolor:\n    bold: green', 'green']
 		];
@@ -73,6 +96,75 @@ suite('Feature color customization integration', () => {
 			const expected = color ? `<strong style="color: ${color};">本文</strong>` : '<strong>本文</strong>';
 			assert.strictEqual(md.render(`---\n${yaml}\n---\n**本文**`, env), `<p>${expected}</p>\n`, yaml);
 		}
+	});
+
+	test('mojicolorの値を入力途中でも設定オブジェクトとして扱う', () => {
+		const md = parser({ 'styles.bold': 'red' });
+		for (const value of ['b', 'bo', 'bold']) {
+			assert.strictEqual(
+				md.render(`---\nmarkdown:\n  mojicolor: ${value}\n---\n**本文**`),
+				'<p><strong style="color: red;">本文</strong></p>\n',
+				value
+			);
+		}
+	});
+
+	test('env.frontmatterでも入力途中のキーだけを無視し、元のenvを変更しない', () => {
+		const md = parser({ 'styles.bold': 'red', 'styles.italic': 'green' });
+		for (const key of ['b', 'bo', 'bol', 'i', 'it', 'ita', 'ital', 'itali']) {
+			const env = Object.freeze({
+				frontmatter: Object.freeze({
+					markdown: Object.freeze({
+						mojicolor: Object.freeze({ [key]: null })
+					})
+				})
+			});
+			assert.strictEqual(
+				md.render('**太字** *斜体*', env),
+				'<p><strong style="color: red;">太字</strong> <em style="color: green;">斜体</em></p>\n',
+				key
+			);
+			assert.deepStrictEqual(env.frontmatter.markdown.mojicolor, { [key]: null });
+		}
+	});
+
+	test('env.frontmatterのmojicolorが入力途中の値でも元のenvを変更しない', () => {
+		const md = parser({ 'styles.bold': 'red' });
+		const env = Object.freeze({
+			frontmatter: Object.freeze({
+				markdown: Object.freeze({ mojicolor: 'bo' })
+			})
+		});
+		assert.strictEqual(
+			md.render('**本文**', env),
+			'<p><strong style="color: red;">本文</strong></p>\n'
+		);
+		assert.strictEqual(env.frontmatter.markdown.mojicolor, 'bo');
+	});
+
+	test('未対応キーと不正値を描画設定へ使用しない', () => {
+		const md = parser({ 'styles.bold': 'red' });
+		for (const styles of [
+			{ body: null },
+			{ body: 'blue' },
+			{ bold: true },
+			{ bold: 42 },
+			{ bold: '' },
+			{ bold: 'red; background: blue' }
+		]) {
+			assert.strictEqual(
+				md.render('**本文**', { frontmatter: { markdown: { mojicolor: styles } } }),
+				'<p><strong style="color: red;">本文</strong></p>\n'
+			);
+		}
+	});
+
+	test('markdown-it-mojicolor単体の厳格な設定検証は維持する', () => {
+		const md = new MarkdownIt().use(require('markdown-it-mojicolor'));
+		assert.throws(
+			() => md.render('**本文**', { frontmatter: { markdown: { mojicolor: { body: 'blue' } } } }),
+			/env\.frontmatter\.markdown\.mojicolor: unsupported style body/u
+		);
 	});
 
 	test('VS Codeが開発中の拡張機能をactivateしてMarkdownプラグインを公開する', async () => {
@@ -84,6 +176,58 @@ suite('Feature color customization integration', () => {
 		const md = new MarkdownIt();
 		exports.extendMarkdownIt(md);
 		assert.strictEqual(md.renderInline('%**黄色**%{yellow}'), '<span style="color: yellow;"><strong>黄色</strong></span>');
+	});
+
+	test('YAMLキー入力途中でもMarkdown言語機能のリクエストを失敗させない', async function() {
+		this.timeout(30000);
+		for (const key of ['b', 'bo', 'bol', 'bold', 'i', 'it', 'ita', 'ital', 'itali', 'italic']) {
+			const document = await vscode.workspace.openTextDocument({
+				language: 'markdown',
+				content: `---\nmarkdown:\n  mojicolor:\n    ${key}:\n---\n[リンク](./target.md)\n`
+			});
+			const lastLine = document.lineAt(document.lineCount - 1);
+			const range = new vscode.Range(0, 0, lastLine.lineNumber, lastLine.text.length);
+
+			await vscode.commands.executeCommand('vscode.executeLinkProvider', document.uri);
+			await vscode.commands.executeCommand('vscode.executeFoldingRangeProvider', document.uri);
+			await vscode.commands.executeCommand('vscode.executeCodeActionProvider', document.uri, range);
+			await vscode.commands.executeCommand('vscode.executeDocumentSymbolProvider', document.uri);
+		}
+
+		for (const value of ['b', 'bo', 'bold']) {
+			const document = await vscode.workspace.openTextDocument({
+				language: 'markdown',
+				content: `---\nmarkdown:\n  mojicolor: ${value}\n---\n[リンク](./target.md)\n`
+			});
+			const lastLine = document.lineAt(document.lineCount - 1);
+			const range = new vscode.Range(0, 0, lastLine.lineNumber, lastLine.text.length);
+
+			await vscode.commands.executeCommand('vscode.executeLinkProvider', document.uri);
+			await vscode.commands.executeCommand('vscode.executeFoldingRangeProvider', document.uri);
+			await vscode.commands.executeCommand('vscode.executeCodeActionProvider', document.uri, range);
+			await vscode.commands.executeCommand('vscode.executeDocumentSymbolProvider', document.uri);
+		}
+
+		for (const yaml of [
+			'mojicolor:\n    太字:',
+			'mojicolor:\n    太字: 赤',
+			'mojicolor:\n    bold: true',
+			'mojicolor:\n    bold: 42',
+			'mojicolor:\n    bold: ""',
+			'mojicolor:\n    bold: "red; background: blue"'
+		]) {
+			const document = await vscode.workspace.openTextDocument({
+				language: 'markdown',
+				content: `---\nmarkdown:\n  ${yaml}\n---\n[リンク](./target.md)\n`
+			});
+			const lastLine = document.lineAt(document.lineCount - 1);
+			const range = new vscode.Range(0, 0, lastLine.lineNumber, lastLine.text.length);
+
+			await vscode.commands.executeCommand('vscode.executeLinkProvider', document.uri);
+			await vscode.commands.executeCommand('vscode.executeFoldingRangeProvider', document.uri);
+			await vscode.commands.executeCommand('vscode.executeCodeActionProvider', document.uri, range);
+			await vscode.commands.executeCommand('vscode.executeDocumentSymbolProvider', document.uri);
+		}
 	});
 
 	test('明示色だけでは太字にせず、範囲内のMarkdownを保持する', () => {
