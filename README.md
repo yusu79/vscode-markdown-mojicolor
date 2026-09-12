@@ -1,8 +1,8 @@
-# vscode-markdown-mojicolor
+# Markdown MojiColor
 ![GitHub](https://img.shields.io/github/license/yusu79/vscode-markdown-mojicolor)
 [![GitHub Release](https://img.shields.io/github/v/release/yusu79/vscode-markdown-mojicolor)](https://github.com/yusu79/vscode-markdown-mojicolor/releases/latest)
 
-[日本語](#vscode-markdown-mojicolor) | [English](#english)
+[日本語](#markdown-mojicolor) | [English](#english)
 
 Markdownの文字色を変更可能にするVS Code拡張機能です｡
 
@@ -25,7 +25,7 @@ VS Codeのマーケットプレイスで「Markdown MojiColor」と入力して�
 | `%トマト%{tomato}`               | `<span style="color: tomato;">トマト</span>`                            | 色を直接指定できます｡                           |
 | `%イエロー%{#ffdc00}`             | `<span style="color: #ffdc00;">イエロー</span>`                          | 16進数で色を指定できます｡                        |
 | `%イエロー%{イエロー}`                | `<span style="color: #ffdc00;">イエロー</span>`                          | 日本語で指定すると､対応した16進数に変換します｡             |
-| `%桃%{桃色}`                     | `<span style="color: #f09199;">桃</span>`                             | [和色](https://l.pg1x.com/X3e4)も指定できます｡ |
+| `%桃%{桃色}`                     | `<span style="color: #f09199;">桃</span>`                             | [和色](https://www.colordic.org/w)も指定できます｡ |
 | `%桃%{ももいろ}`                   | `<span style="color: #f09199;">桃</span>`                             | 読み仮名でも指定できます｡                         |
 | `%アクア%{rgb(0,255,255)}`       | `<span style="color: rgb(0,255,255);">アクア</span>`                    | RGB表記で色を指定できます｡                       |
 | `%ビスク%{hsl(33,100%,88%)}`     | `<span style="color: hsl(33,100%,88%);">ビスク</span>`                  | HSL表記で色を指定できます｡                       |
@@ -41,7 +41,7 @@ VS Codeのマーケットプレイスで「Markdown MojiColor」と入力して�
 色名は日本語にも対応しています。
 例えば、`%文字%{桃色}`とすると､桃の色に近い`#f09199`に変換されます。
 
-どの色に対応しているかは、[日本の伝統色 和色大辞典 - Traditional Colors of Japan](https://l.pg1x.com/X3e4)を参照してください。
+どの色に対応しているかは、「[日本の伝統色 和色大辞典](https://www.colordic.org/w)」を参照してください。
 
 
 ### 太字と斜体の自動着色
@@ -114,7 +114,7 @@ markdown:
 
 ## English
 
-[日本語](#vscode-markdown-mojicolor) | [English](#english)
+[日本語](#markdown-mojicolor) | [English](#english)
 
 A VS Code extension that lets you change text colors in Markdown previews.
 
@@ -150,7 +150,7 @@ The extension uses a markdown-it plugin that converts `%text%{color}` to `<span 
 
 Colors can be specified using color names, hexadecimal values, RGB, or HSL. Japanese color names are also supported. For example, `%text%{桃色}` is converted to the peach-like color `#f09199`.
 
-See [Traditional Colors of Japan](https://l.pg1x.com/X3e4) for the supported Japanese traditional colors.
+See [Traditional Colors of Japan](https://www.colordic.org/w) for the supported Japanese traditional colors.
 
 ### Automatic coloring for bold and italic text
 
